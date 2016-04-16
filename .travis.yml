@@ -1,0 +1,21 @@
+language: php
+
+# This triggers builds to run on the new TravisCI infrastructure.
+# See: http://docs.travis-ci.com/user/workers/container-based-infrastructure/
+sudo: false
+
+php:
+  - 7
+
+before_install:
+  - travis_retry composer self-update
+
+install:
+  - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
+
+script:
+  - ./vendor/bin/phpcs --standard=psr2 src/
+  - ./vendor/bin/codecept run functional,unit --config .codeception.yml --coverage-xml
+
+after_script:
+  - ./vendor/bin/ocular code-coverage:upload --format=php-clover tests/_output/coverage.xml
