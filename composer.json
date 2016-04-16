@@ -1,5 +1,5 @@
 {
-  "name": "axelitus/FluGit",
+  "name": "axelitus/flugit",
   "type": "library",
   "description": "FluGit is a PHP package for using Git through a fluent interface.",
   "keywords": [],
