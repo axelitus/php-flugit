@@ -256,7 +256,8 @@ class InitCommand implements Command
         $this->quiet && $str .= ' ' . self::OPTION_QUIET;
         $this->bare && $str .= ' ' . self::OPTION_BARE;
         ($this->template !== null) && $str .= ' ' . self::OPTION_TEMPLATE . '=' . escapeshellarg($this->template);
-        ($this->separateGitDir !== null) && $str .= ' ' . self::OPTION_SEPARATE_GIT_DIR . '=' . escapeshellarg($this->separateGitDir);
+        ($this->separateGitDir !== null) && $str .= ' ' . self::OPTION_SEPARATE_GIT_DIR . '='
+            . escapeshellarg($this->separateGitDir);
         if ($this->shared !== null) {
             $str .= ' ' . self::OPTION_SHARED;
             is_string($this->shared) && $str .= '=' . $this->shared;

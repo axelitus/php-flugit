@@ -26,11 +26,11 @@
   },
   "autoload": {
     "psr-4": {
-      "axelitus\\FluGit\\": "src"
+      "axelitus\\FluGit\\": "src/"
     },
     "autoload-dev": {
       "psr-4": {
-        "axelitus\\FluGit\\Tests\\": "tests"
+        "axelitus\\FluGit\\Tests\\": "tests/"
       }
     }
   }
