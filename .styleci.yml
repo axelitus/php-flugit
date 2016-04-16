@@ -1,5 +1,8 @@
 preset: psr2
+
 risky: false
+
 linting: true
+
 enabled:
   - binary_operator_space
