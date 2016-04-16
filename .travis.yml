@@ -15,7 +15,7 @@ install:
 
 script:
   - ./vendor/bin/phpcs --standard=psr2 src/
-  - ./vendor/bin/codecept run functional,unit --config .codeception.yml --coverage-xml
+  - ./vendor/bin/codecept --config .codeception.yml run functional,unit --colors --report --html --xml --coverage-xml --coverage-html
 
 after_script:
   - ./vendor/bin/ocular code-coverage:upload --format=php-clover tests/_output/coverage.xml

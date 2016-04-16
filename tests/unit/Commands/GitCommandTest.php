@@ -17,7 +17,7 @@ use axelitus\FluGit\Commands\Command;
 use axelitus\FluGit\Commands\GitCommand;
 use axelitus\FluGit\Repo;
 use Codeception\Specify;
-use Codeception\TestCase\Test;
+use Codeception\Test\Unit;
 use Mockery;
 use Mockery\Mock;
 use ReflectionMethod;
@@ -27,7 +27,7 @@ use RuntimeException;
  * Class GitCommandTest
  * @package axelitus\FluGit\Tests\Commands
  */
-class GitCommandTest extends Test
+class GitCommandTest extends Unit
 {
     use Specify;
 
@@ -89,7 +89,7 @@ class GitCommandTest extends Test
      * Tests the git command prepare function.
      * GitCommand->prepare()
      */
-    public function testPrepare()
+    public function testPrepareGitCommand()
     {
         $this->specify("Should prepare the command correctly.", function () {
             $cmd = new GitCommand($this->commandMock);
@@ -102,8 +102,9 @@ class GitCommandTest extends Test
 
     /**
      * Tests git command execution.
+     * GitCommand->execute()
      */
-    public function testExecute()
+    public function testExecuteGitCommand()
     {
         $this->specify("Should execute the command correctly.", function () {
             $cmd = new GitCommand($this->commandMock);

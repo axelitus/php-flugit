@@ -16,13 +16,13 @@ namespace axelitus\FluGit\Tests;
 use axelitus\FluGit\Commands\Workspace\InitCommand;
 use axelitus\FluGit\Repo;
 use Codeception\Specify;
-use Codeception\TestCase\Test;
+use Codeception\Test\Unit;
 
 /**
  * Class RepoTest
  * @package axelitus\FluGit\Tests
  */
-class RepoTest extends Test
+class RepoTest extends Unit
 {
     use Specify;
 

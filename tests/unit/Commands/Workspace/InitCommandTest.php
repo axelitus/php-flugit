@@ -17,7 +17,7 @@ use axelitus\FluGit\Commands\GitCommand;
 use axelitus\FluGit\Commands\Workspace\InitCommand;
 use axelitus\FluGit\Repo;
 use Codeception\Specify;
-use Codeception\TestCase\Test;
+use Codeception\Test\Unit;
 use Mockery;
 use Mockery\Mock;
 use stdClass;
@@ -26,7 +26,7 @@ use stdClass;
  * Class InitCommandTest
  * @package axelitus\FluGit\Tests\Commands\Workspace
  */
-class InitCommandTest extends Test
+class InitCommandTest extends Unit
 {
     use Specify;
 

@@ -13,13 +13,13 @@ declare(strict_types = 1);
 
 namespace axelitus\FluGit\Tests;
 
-use Codeception\TestCase\Test;
+use Codeception\Test\Unit;
 
 /**
  * Class GitTest
  * @package axelitus\FluGit\Tests
  */
-class GitTest extends Test
+class GitTest extends Unit
 {
     /**
      * Tests if git is available
