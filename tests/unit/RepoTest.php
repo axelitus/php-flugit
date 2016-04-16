@@ -1,26 +1,26 @@
 <?php
 /**
- * PHPIt is a PHP package for using Git through a fluent interface.
+ * FluGit is a PHP package for using Git through a fluent interface.
  *
- * @package    axelitus\PHPIt
+ * @package    axelitus\FluGit
  * @version    0.1
  * @author     Axel Pardemann
  * @license    MIT License
  * @copyright  2016 axelitus
- * @link       https://github.com/axelitus/phpit
+ * @link       https://github.com/axelitus/flugit
  */
 declare(strict_types = 1);
 
-namespace axelitus\PHPIt\Tests;
+namespace axelitus\FluGit\Tests;
 
-use axelitus\PHPIt\Commands\Workspace\InitCommand;
-use axelitus\PHPIt\Repo;
+use axelitus\FluGit\Commands\Workspace\InitCommand;
+use axelitus\FluGit\Repo;
 use Codeception\Specify;
 use Codeception\TestCase\Test;
 
 /**
  * Class RepoTest
- * @package axelitus\PHPIt\Tests
+ * @package axelitus\FluGit\Tests
  */
 class RepoTest extends Test
 {

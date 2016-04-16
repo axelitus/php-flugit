@@ -1,23 +1,23 @@
 <?php
 /**
- * PHPIt is a PHP package for using Git through a fluent interface.
+ * FluGit is a PHP package for using Git through a fluent interface.
  *
- * @package    axelitus\PHPIt
+ * @package    axelitus\FluGit
  * @version    0.1
  * @author     Axel Pardemann
  * @license    MIT License
  * @copyright  2016 axelitus
- * @link       https://github.com/axelitus/phpit
+ * @link       https://github.com/axelitus/flugit
  */
 declare(strict_types = 1);
 
-namespace axelitus\PHPIt\Commands;
+namespace axelitus\FluGit\Commands;
 
-use axelitus\PHPIt\Repo;
+use axelitus\FluGit\Repo;
 
 /**
  * Interface Command
- * @package axelitus\PHPIt\Commands
+ * @package axelitus\FluGit\Commands
  */
 interface Command
 {

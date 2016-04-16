@@ -1,9 +1,9 @@
 {
-  "name": "axelitus/phpit",
+  "name": "axelitus/FluGit",
   "type": "library",
-  "description": "PHPIt is a package that let's you use Git through OOP code in PHP.",
+  "description": "FluGit is a PHP package for using Git through a fluent interface.",
   "keywords": [],
-  "homepage": "https://github.com/axelitus/phpit",
+  "homepage": "https://github.com/axelitus/flugit",
   "license": "MIT",
   "authors": [
     {
@@ -26,11 +26,11 @@
   },
   "autoload": {
     "psr-4": {
-      "axelitus\\PHPIt\\": "src"
+      "axelitus\\FluGit\\": "src"
     },
     "autoload-dev": {
       "psr-4": {
-        "axelitus\\PHPIt\\Test\\": "tests"
+        "axelitus\\FluGit\\Tests\\": "tests"
       }
     }
   }

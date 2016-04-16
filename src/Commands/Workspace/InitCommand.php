@@ -1,25 +1,25 @@
 <?php
 /**
- * PHPIt is a PHP package for using Git through a fluent interface.
+ * FluGit is a PHP package for using Git through a fluent interface.
  *
- * @package    axelitus\PHPIt
+ * @package    axelitus\FluGit
  * @version    0.1
  * @author     Axel Pardemann
  * @license    MIT License
  * @copyright  2016 axelitus
- * @link       https://github.com/axelitus/phpit
+ * @link       https://github.com/axelitus/flugit
  */
 declare(strict_types = 1);
 
-namespace axelitus\PHPIt\Commands\Workspace;
+namespace axelitus\FluGit\Commands\Workspace;
 
-use axelitus\PHPIt\Commands\Command;
-use axelitus\PHPIt\Commands\GitCommand;
-use axelitus\PHPIt\Repo;
+use axelitus\FluGit\Commands\Command;
+use axelitus\FluGit\Commands\GitCommand;
+use axelitus\FluGit\Repo;
 
 /**
  * Class InitCommand
- * @package axelitus\PHPIt\Commands\Workspace
+ * @package axelitus\FluGit\Commands\Workspace
  * @see https://git-scm.com/docs/git-init
  */
 class InitCommand implements Command

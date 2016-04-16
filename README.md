@@ -1,3 +1,3 @@
-# PHPIt
+# FluGit
 
-PHPIt is a PHP package for using Git through a fluent interface.
+FluGit is a PHP package for using Git through a fluent interface.
