@@ -13,8 +13,8 @@ declare(strict_types = 1);
 
 namespace axelitus\FluGit;
 
+use axelitus\FluGit\Commands\Workspace\CloneCommand;
 use axelitus\FluGit\Commands\Workspace\InitCommand;
-use RuntimeException;
 
 /**
  * Class Repo
@@ -33,7 +33,7 @@ class Repo
      */
     public function __construct(string $path = '')
     {
-        $this->path = $path;
+        $this->setPath($path);
     }
 
     /**
@@ -42,7 +42,7 @@ class Repo
      */
     public function setPath(string $path)
     {
-        $this->setPath($path);
+        $this->path = (($path === '') ? getcwd() : $path);
     }
 
     /**
@@ -62,5 +62,14 @@ class Repo
     public function init(string $destination = '') : InitCommand
     {
         return new InitCommand($this, $destination);
+    }
+
+    /**
+     * Creates a git clone command.
+     * @return CloneCommand The newly created command.
+     */
+    public function clone(string $source, string $destination = '') : CloneCommand
+    {
+        return new CloneCommand($this, $source, $destination);
     }
 }

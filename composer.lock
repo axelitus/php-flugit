@@ -1165,7 +1165,7 @@
                     "email": "schmittjoh@gmail.com"
                 }
             ],
-            "description": "Option Type for PHP",
+            "description": "OptionFormatter Type for PHP",
             "keywords": [
                 "language",
                 "option",

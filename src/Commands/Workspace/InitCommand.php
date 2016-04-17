@@ -14,7 +14,7 @@ declare(strict_types = 1);
 namespace axelitus\FluGit\Commands\Workspace;
 
 use axelitus\FluGit\Commands\Command;
-use axelitus\FluGit\Commands\Option;
+use axelitus\FluGit\Commands\OptionFormatter;
 use axelitus\FluGit\Commands\GitCommand;
 use axelitus\FluGit\Repo;
 
@@ -287,15 +287,15 @@ class InitCommand implements Command
         $str = self::ACTION;
 
         // --- quiet ---
-        $str .= Option::formatBool(self::OPTION_QUIET, $this->quiet);
+        $str .= OptionFormatter::formatBool(self::OPTION_QUIET, $this->quiet);
         // --- bare ---
-        $str .= Option::formatBool(self::OPTION_BARE, $this->bare);
+        $str .= OptionFormatter::formatBool(self::OPTION_BARE, $this->bare);
         // --- template ---
-        $str .= Option::formatPath(self::OPTION_TEMPLATE, $this->template);
+        $str .= OptionFormatter::formatPath(self::OPTION_TEMPLATE, $this->template);
         // --- separate-git-dir ---
-        $str .= Option::formatPath(self::OPTION_SEPARATE_GIT_DIR, $this->separateGitDir);
+        $str .= OptionFormatter::formatPath(self::OPTION_SEPARATE_GIT_DIR, $this->separateGitDir);
         // --- shared ---
-        $str .= Option::formatBoolOrString(self::OPTION_SHARED, $this->shared);
+        $str .= OptionFormatter::formatBoolOrString(self::OPTION_SHARED, $this->shared);
         // --- destination ---
         ($this->destination !== '') && $str .= ' ' . escapeshellarg($this->destination);
 
