@@ -25,6 +25,7 @@ class Git
      * Gets whether git command is available or not.
      * @param string[] $output
      * @return bool True if git can be used, false otherwise.
+     * @codeCoverageIgnore (This function depends on the running environment)
      */
     public static function isAvailable(&$output = null) : bool
     {
@@ -38,6 +39,7 @@ class Git
     /**
      * Gets the git version.
      * @return string The git version
+     * @codeCoverageIgnore (This function depends on the running environment)
      */
     public static function version() : string
     {
