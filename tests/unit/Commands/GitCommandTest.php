@@ -93,11 +93,22 @@ class GitCommandTest extends Unit
     {
         $this->specify("Should prepare the command correctly.", function () {
             $cmd = new GitCommand($this->commandMock);
-            $git = 'git -C ' . self::TEST_PATH . ' ' . self::TEST_COMMAND;
+            $git = 'git -C ' . realpath(self::TEST_PATH) . ' ' . self::TEST_COMMAND;
             $method = new ReflectionMethod(GitCommand::class, 'prepare');
             $method->setAccessible(true);
             $this->assertEquals($git, $method->invoke($cmd, $this->commandMock));
         });
+
+        $this->specify("Should throw a RuntimeException due to nonexistent path.", function () {
+            $repoMock = Mockery::mock(Repo::Class);
+            $repoMock->shouldReceive('getPath')->andReturn(self::TEST_NONEXISTENT_PATH);
+            $cmdMock = Mockery::mock(Command::class);
+            $cmdMock->shouldReceive('getRepo')->andReturn($repoMock);
+            $cmd = new GitCommand($cmdMock);
+            $method = new ReflectionMethod(GitCommand::class, 'prepare');
+            $method->setAccessible(true);
+            $method->invoke($cmd, $cmdMock);
+        }, ['throws' => RuntimeException::class]);
     }
 
     /**

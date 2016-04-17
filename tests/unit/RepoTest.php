@@ -43,14 +43,10 @@ class RepoTest extends Unit
      */
     public function testRepoCreation()
     {
-        $this->specify("Should create a Repo.", function () {
+        $this->specify("Should create a repo.", function () {
             $repo = new Repo(self::TEST_PATH);
             $this->assertInstanceOf(Repo::class, $repo);
         });
-
-        $this->specify("Should throw a RuntimeException.", function () {
-            $repo = new Repo(self::TEST_NONEXISTENT_PATH);
-        }, ['throws' => RuntimeException::class]);
     }
 
     /**
@@ -59,9 +55,9 @@ class RepoTest extends Unit
      */
     public function testsRepoGetPath()
     {
-        $this->specify("Should get an InitCommand", function () {
+        $this->specify("Should get the repo path.", function () {
             $repo = new Repo(self::TEST_PATH);
-            $this->assertEquals(realpath(self::TEST_PATH), $repo->getPath());
+            $this->assertEquals(self::TEST_PATH, $repo->getPath());
         });
     }
 

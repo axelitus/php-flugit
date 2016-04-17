@@ -31,18 +31,18 @@ class Repo
      * Repo constructor. Creates a new Repo instance.
      * @param string $path The path to the repo.
      */
-    public function __construct(string $path)
+    public function __construct(string $path = '')
     {
-        if (!is_dir($path)) {
-            throw new RuntimeException(
-                sprintf(
-                    'Directory "%s" does not exist',
-                    $path
-                )
-            );
-        }
+        $this->path = $path;
+    }
 
-        $this->path = realpath($path);
+    /**
+     * Sets the repo's path.
+     * @param string $path The path to the repo.
+     */
+    public function setPath(string $path)
+    {
+        $this->setPath($path);
     }
 
     /**
@@ -56,10 +56,11 @@ class Repo
 
     /**
      * Creates a git init command.
+     * @param string $destination The destination path.
      * @return InitCommand The newly created command.
      */
-    public function init() : InitCommand
+    public function init(string $destination = '') : InitCommand
     {
-        return new InitCommand();
+        return new InitCommand($this, $destination);
     }
 }

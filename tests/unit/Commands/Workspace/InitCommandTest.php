@@ -183,7 +183,7 @@ class InitCommandTest extends Unit
      * Tests init command's toString.
      * InitCommand->__toString()
      */
-    public function testInitCommandFluentToString()
+    public function testInitCommandToString()
     {
         $str = 'init';
         $this->specify("Should get '{$str}'.", function () use ($str) {

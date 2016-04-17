@@ -43,6 +43,16 @@ class GitCommand
     protected function prepare(Command $command) : string
     {
         $path = $command->getRepo()->getPath();
+        if (!is_dir($path)) {
+            throw new RuntimeException(
+                sprintf(
+                    'Directory "%s" does not exist.',
+                    $path
+                )
+            );
+        }
+        $path = realpath($path);
+
         $git = 'git -C ' . $path . ' ' . $this->command;
         return $git;
     }

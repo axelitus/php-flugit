@@ -95,6 +95,11 @@ class InitCommand implements Command
     protected $repo;
 
     /**
+     * @var string The destination path.
+     */
+    protected $destination;
+
+    /**
      * @var bool The command's bare option.
      */
     protected $bare = false;
@@ -122,10 +127,12 @@ class InitCommand implements Command
     /**
      * InitCommand constructor. Creates a new InitCommand instance.
      * @param Repo $repo The repo this InitCommand belongs to.
+     * @param string $destination The destination path.
      */
-    public function __construct(Repo $repo)
+    public function __construct(Repo $repo, string $destination = '')
     {
         $this->repo = $repo;
+        $this->destination($destination);
     }
 
     /**
@@ -135,6 +142,26 @@ class InitCommand implements Command
     public function getRepo() : Repo
     {
         return $this->repo;
+    }
+
+    /**
+     * Sets the destination path.
+     * @param string $path The destination path.
+     * @return InitCommand Returns itself for method chaining.
+     */
+    public function destination(string $path) : InitCommand
+    {
+        $this->destination = $path;
+        return $this;
+    }
+
+    /**
+     * Gets the destination path.
+     * @return string The destination path.
+     */
+    public function getDestination() : string
+    {
+        return $this->destination;
     }
 
     /**
@@ -273,6 +300,8 @@ class InitCommand implements Command
             $str .= ' ' . self::OPTION_SHARED;
             is_string($this->shared) && $str .= '=' . $this->shared;
         }
+        // --- destination ---
+        ($this->destination !== '') && $str .= ' ' . escapeshellarg($this->destination);
 
         return $str;
     }
