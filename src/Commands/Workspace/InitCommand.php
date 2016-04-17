@@ -301,9 +301,4 @@ class InitCommand implements Command
 
         return $str;
     }
-
-    protected function _toStringBool(bool $value, string $option)
-    {
-        
-    }
 }
