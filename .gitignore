@@ -90,3 +90,5 @@ sftp-config.json
 # codeception
 tests/_output/
 tests/_support/_generated/
+tests/_temp/*
+!tests/_temp/.gitkeep
