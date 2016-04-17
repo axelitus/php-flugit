@@ -1,8 +1,8 @@
 {
   "name": "axelitus/flugit",
   "type": "library",
-  "description": "FluGit is a PHP package for using Git through a fluent interface.",
-  "keywords": [],
+  "description": "FluGit let's you use Git through a fluent interface.",
+  "keywords": ["git", "fluent", "interface", "wrapper"],
   "homepage": "https://github.com/axelitus/flugit",
   "license": "MIT",
   "authors": [
