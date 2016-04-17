@@ -111,7 +111,7 @@ class InitCommand implements Command
     protected $separateGitDir = null;
 
     /**
-     * @var null|string The command's shared option.
+     * @var null|bool|string The command's shared option.
      */
     protected $shared = null;
 
