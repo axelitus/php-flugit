@@ -123,7 +123,7 @@ class InitCommand implements Command
      * InitCommand constructor. Creates a new InitCommand instance.
      * @param Repo $repo The repo this InitCommand belongs to.
      */
-    public function __construct(Repo $repo = null)
+    public function __construct(Repo $repo)
     {
         $this->repo = $repo;
     }
@@ -169,8 +169,8 @@ class InitCommand implements Command
     }
 
     /**
-     * Gets the value of property separateGitDir.
-     * @return string|null Returns the value of property separateGitDir or null.
+     * Gets the value of property separate-git-dir.
+     * @return string|null Returns the value of property separate-git-dir or null.
      */
     public function getSeparateGitDir()
     {
@@ -241,9 +241,13 @@ class InitCommand implements Command
         return $this->quiet;
     }
 
+    /**
+     * Compiles the command into an executable git command.
+     * @return GitCommand The compiled git command.
+     */
     public function compile() : GitCommand
     {
-        return new GitCommand($this);//->repo, $this);
+        return new GitCommand($this);
     }
 
     /**
@@ -253,11 +257,18 @@ class InitCommand implements Command
     public function __toString()
     {
         $str = self::ACTION;
+
+        // --- quiet ---
         $this->quiet && $str .= ' ' . self::OPTION_QUIET;
+        // --- bare ---
         $this->bare && $str .= ' ' . self::OPTION_BARE;
-        ($this->template !== null) && $str .= ' ' . self::OPTION_TEMPLATE . '=' . escapeshellarg($this->template);
+        // --- template ---
+        ($this->template !== null) && $str .= ' ' . self::OPTION_TEMPLATE . '='
+            . escapeshellarg($this->template);
+        // --- separate-git-dir ---
         ($this->separateGitDir !== null) && $str .= ' ' . self::OPTION_SEPARATE_GIT_DIR . '='
             . escapeshellarg($this->separateGitDir);
+        // --- shared ---
         if ($this->shared !== null) {
             $str .= ' ' . self::OPTION_SHARED;
             is_string($this->shared) && $str .= '=' . $this->shared;
