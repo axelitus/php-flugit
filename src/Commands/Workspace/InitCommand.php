@@ -14,6 +14,7 @@ declare(strict_types = 1);
 namespace axelitus\FluGit\Commands\Workspace;
 
 use axelitus\FluGit\Commands\Command;
+use axelitus\FluGit\Commands\Option;
 use axelitus\FluGit\Commands\GitCommand;
 use axelitus\FluGit\Repo;
 
@@ -286,23 +287,23 @@ class InitCommand implements Command
         $str = self::ACTION;
 
         // --- quiet ---
-        $this->quiet && $str .= ' ' . self::OPTION_QUIET;
+        $str .= Option::formatBool(self::OPTION_QUIET, $this->quiet);
         // --- bare ---
-        $this->bare && $str .= ' ' . self::OPTION_BARE;
+        $str .= Option::formatBool(self::OPTION_BARE, $this->bare);
         // --- template ---
-        ($this->template !== null) && $str .= ' ' . self::OPTION_TEMPLATE . '='
-            . escapeshellarg($this->template);
+        $str .= Option::formatPath(self::OPTION_TEMPLATE, $this->template);
         // --- separate-git-dir ---
-        ($this->separateGitDir !== null) && $str .= ' ' . self::OPTION_SEPARATE_GIT_DIR . '='
-            . escapeshellarg($this->separateGitDir);
+        $str .= Option::formatPath(self::OPTION_SEPARATE_GIT_DIR, $this->separateGitDir);
         // --- shared ---
-        if ($this->shared !== null) {
-            $str .= ' ' . self::OPTION_SHARED;
-            is_string($this->shared) && $str .= '=' . $this->shared;
-        }
+        $str .= Option::formatBoolOrString(self::OPTION_SHARED, $this->shared);
         // --- destination ---
         ($this->destination !== '') && $str .= ' ' . escapeshellarg($this->destination);
 
         return $str;
+    }
+
+    protected function _toStringBool(bool $value, string $option)
+    {
+        
     }
 }
