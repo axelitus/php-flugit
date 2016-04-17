@@ -94,11 +94,13 @@ class InitCommandTest extends Unit
      */
     public function testInitCommandFluentSeparateGitDir()
     {
-        $this->specify("Should set the separateGitDir option.", function () {
+        $this->specify("Should set and remove the separate-git-dir option.", function () {
             $cmd = new InitCommand($this->repoMock);
             $this->assertNull($cmd->getSeparateGitDir());
             $this->assertSame($cmd, $cmd->separateGitDir(self::TEST_PATH));
             $this->assertEquals(self::TEST_PATH, $cmd->getSeparateGitDir());
+            $this->assertSame($cmd, $cmd->separateGitDir(null));
+            $this->assertNull($cmd->getSeparateGitDir());
         });
     }
 
@@ -108,7 +110,7 @@ class InitCommandTest extends Unit
      */
     public function testInitCommandFluentShared()
     {
-        $this->specify("Should set the shared option for bool and string.", function () {
+        $this->specify("Should set and remove the shared option.", function () {
             $cmd = new InitCommand($this->repoMock);
             $this->assertNull($cmd->getShared());
             $this->assertSame($cmd, $cmd->shared());
@@ -116,6 +118,10 @@ class InitCommandTest extends Unit
             $this->assertSame($cmd, $cmd->shared(InitCommand::SHARED_WORLD));
             $this->assertEquals(InitCommand::SHARED_WORLD, $cmd->getShared());
             $this->assertSame($cmd, $cmd->shared(false));
+            $this->assertNull($cmd->getShared());
+            $this->assertSame($cmd, $cmd->shared(InitCommand::SHARED_ALL));
+            $this->assertEquals(InitCommand::SHARED_ALL, $cmd->getShared());
+            $this->assertSame($cmd, $cmd->shared(null));
             $this->assertNull($cmd->getShared());
         });
 
@@ -135,11 +141,13 @@ class InitCommandTest extends Unit
      */
     public function testInitCommandFluentTemplate()
     {
-        $this->specify("Should set the template option.", function () {
+        $this->specify("Should set and remove the template option.", function () {
             $cmd = new InitCommand($this->repoMock);
             $this->assertNull($cmd->getTemplate());
             $this->assertSame($cmd, $cmd->template(self::TEST_PATH));
             $this->assertEquals(self::TEST_PATH, $cmd->getTemplate());
+            $this->assertSame($cmd, $cmd->template(null));
+            $this->assertNull($cmd->getTemplate());
         });
     }
 

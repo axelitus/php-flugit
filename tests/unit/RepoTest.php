@@ -17,6 +17,7 @@ use axelitus\FluGit\Commands\Workspace\InitCommand;
 use axelitus\FluGit\Repo;
 use Codeception\Specify;
 use Codeception\Test\Unit;
+use RuntimeException;
 
 /**
  * Class RepoTest
@@ -32,6 +33,11 @@ class RepoTest extends Unit
     const TEST_PATH = './tests/_temp';
 
     /**
+     * @var string Nonexistent path.
+     */
+    const TEST_NONEXISTENT_PATH = './tests/_nonexistent';
+
+    /**
      * Tests Repo creation.
      * new Repo()
      */
@@ -41,6 +47,10 @@ class RepoTest extends Unit
             $repo = new Repo(self::TEST_PATH);
             $this->assertInstanceOf(Repo::class, $repo);
         });
+
+        $this->specify("Should throw a RuntimeException.", function () {
+            $repo = new Repo(self::TEST_NONEXISTENT_PATH);
+        }, ['throws' => RuntimeException::class]);
     }
 
     /**
