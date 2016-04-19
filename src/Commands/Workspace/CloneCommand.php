@@ -15,9 +15,9 @@ namespace axelitus\FluGit\Commands\Workspace;
 
 use axelitus\FluGit\Commands\Command;
 use axelitus\FluGit\Commands\GitCommand;
-use axelitus\FluGit\Commands\OptionFormatter;
+use axelitus\FluGit\Commands\Options\OptionFormatter;
+use axelitus\FluGit\Commands\Options\OptionValidator;
 use axelitus\FluGit\Repo;
-use RuntimeException;
 
 /**
  * Class CloneCommand
@@ -32,54 +32,9 @@ class CloneCommand implements Command
     const ACTION = 'clone';
 
     /**
-     * @var string Command option: template.
-     */
-    const OPTION_TEMPLATE = '--template';
-
-    /**
-     * @var string Command option: local.
-     */
-    const OPTION_LOCAL = '--local';
-
-    /**
-     * @var string Command option: no-local.
-     */
-    const OPTION_NO_LOCAL = '--no-local';
-
-    /**
-     * @var string Command option: shared.
-     */
-    const OPTION_SHARED = '--shared';
-
-    /**
-     * @var string Command option: no-hardlinks.
-     */
-    const OPTION_NO_HARDLINKS = '--no-hardlinks';
-
-    /**
-     * @var string Command option: quiet.
-     */
-    const OPTION_QUIET = '--quiet';
-
-    /**
-     * @var string Command option: no-checkout.
-     */
-    const OPTION_NO_CHECKOUT = '--no-checkout';
-
-    /**
      * @var string Command option: bare.
      */
     const OPTION_BARE = '--bare';
-
-    /**
-     * @var string Command option: mirror.
-     */
-    const OPTION_MIRROR = '--mirror';
-
-    /**
-     * @var string Command option: origin.
-     */
-    const OPTION_ORIGIN = '--origin';
 
     /**
      * @var string Command option: branch.
@@ -87,24 +42,9 @@ class CloneCommand implements Command
     const OPTION_BRANCH = '--branch';
 
     /**
-     * @var string Command option: upload-pack.
+     * @var string Command option: config.
      */
-    const OPTION_UPLOAD_PACK = '--upload-pack';
-
-    /**
-     * @var string Command option: reference.
-     */
-    const OPTION_REFERENCE = '--reference';
-
-    /**
-     * @var string Command option: dissociate.
-     */
-    const OPTION_DISSOCIATE = '--dissociate';
-
-    /**
-     * @var string Command option: separate-git-dir.
-     */
-    const OPTION_SEPARATE_GIT_DIR = '--separate-git-dir';
+    const OPTION_CONFIG = '--config';
 
     /**
      * @var string Command option: depth.
@@ -112,9 +52,34 @@ class CloneCommand implements Command
     const OPTION_DEPTH = '--depth';
 
     /**
-     * @var string Command option: single-branch.
+     * @var string Command option: dissociate.
      */
-    const OPTION_SINGLE_BRANCH = '--single-branch';
+    const OPTION_DISSOCIATE = '--dissociate';
+
+    /**
+     * @var string Command option: local.
+     */
+    const OPTION_LOCAL = '--local';
+
+    /**
+     * @var string Command option: mirror.
+     */
+    const OPTION_MIRROR = '--mirror';
+
+    /**
+     * @var string Command option: no-checkout.
+     */
+    const OPTION_NO_CHECKOUT = '--no-checkout';
+
+    /**
+     * @var string Command option: no-hardlinks.
+     */
+    const OPTION_NO_HARDLINKS = '--no-hardlinks';
+
+    /**
+     * @var string Command option: no-local.
+     */
+    const OPTION_NO_LOCAL = '--no-local';
 
     /**
      * @var string Command option: no-single-branch.
@@ -122,14 +87,49 @@ class CloneCommand implements Command
     const OPTION_NO_SINGLE_BRANCH = '--no-single-branch';
 
     /**
+     * @var string Command option: origin.
+     */
+    const OPTION_ORIGIN = '--origin';
+
+    /**
+     * @var string Command option: quiet.
+     */
+    const OPTION_QUIET = '--quiet';
+
+    /**
      * @var string Command option: recursive.
      */
     const OPTION_RECURSIVE = '--recursive';
 
     /**
-     * @var string Command option: config.
+     * @var string Command option: reference.
      */
-    const OPTION_CONFIG = '--config';
+    const OPTION_REFERENCE = '--reference';
+
+    /**
+     * @var string Command option: separate-git-dir.
+     */
+    const OPTION_SEPARATE_GIT_DIR = '--separate-git-dir';
+
+    /**
+     * @var string Command option: shared.
+     */
+    const OPTION_SHARED = '--shared';
+
+    /**
+     * @var string Command option: single-branch.
+     */
+    const OPTION_SINGLE_BRANCH = '--single-branch';
+
+    /**
+     * @var string Command option: template.
+     */
+    const OPTION_TEMPLATE = '--template';
+
+    /**
+     * @var string Command option: upload-pack.
+     */
+    const OPTION_UPLOAD_PACK = '--upload-pack';
 
     /**
      * @var Repo The command's repo context.
@@ -260,15 +260,6 @@ class CloneCommand implements Command
     }
 
     /**
-     * Gets the command's repo context.
-     * @return Repo The repo context.
-     */
-    public function getRepo() : Repo
-    {
-        return $this->repo;
-    }
-
-    /**
      * Sets the source repository path.
      * @param string $value The path to the source repository.
      * @return CloneCommand Returns itself for method chaining.
@@ -280,15 +271,6 @@ class CloneCommand implements Command
     }
 
     /**
-     * Gets the repository source.
-     * @return string The repository source.
-     */
-    public function getSource() : string
-    {
-        return $this->source;
-    }
-
-    /**
      * Sets the destination path.
      * @param string $value The destination path to clone.
      * @return CloneCommand Returns itself for method chaining.
@@ -297,6 +279,15 @@ class CloneCommand implements Command
     {
         $this->destination = $value;
         return $this;
+    }
+
+    /**
+     * Gets the repository source.
+     * @return string The repository source.
+     */
+    public function getSource() : string
+    {
+        return $this->source;
     }
 
     /**
@@ -495,14 +486,7 @@ class CloneCommand implements Command
      */
     public function origin(string $value = null) : CloneCommand
     {
-        if ($value !== null && strpos($value, ' ')) {
-            throw new RuntimeException(
-                sprintf(
-                    'The string "%s" is not valid for origin (spaces are not allowed).',
-                    $value
-                )
-            );
-        }
+        OptionValidator::validNoSpace(self::OPTION_ORIGIN, $value);
         $this->origin = $value;
         return $this;
     }
@@ -523,14 +507,7 @@ class CloneCommand implements Command
      */
     public function branch(string $value = null) : CloneCommand
     {
-        if ($value !== null && strpos($value, ' ')) {
-            throw new RuntimeException(
-                sprintf(
-                    'The string "%s" is not valid for branch (spaces are not allowed).',
-                    $value
-                )
-            );
-        }
+        OptionValidator::validNoSpace(self::OPTION_BRANCH, $value);
         $this->branch = $value;
         return $this;
     }
@@ -705,31 +682,6 @@ class CloneCommand implements Command
     }
 
     /**
-     * Sets a config option value or clears all config values.
-     * @param string|null $value The option value.
-     * @return CloneCommand Returns itself for method chaining.
-     */
-    public function config(string $value = null) : CloneCommand
-    {
-        if ($value !== null && strpos($value, ' ')) {
-            throw new RuntimeException(
-                sprintf(
-                    'The string "%s" is not valid for config (spaces are not allowed).',
-                    $value
-                )
-            );
-        }
-
-        if ($value === null) {
-            $this->configClear();
-        } else {
-            $this->config[] = $value;
-        }
-
-        return $this;
-    }
-
-    /**
      * Sets an array of config options.
      * @param array $values The config options.
      * @return CloneCommand Returns itself for method chaining.
@@ -745,12 +697,19 @@ class CloneCommand implements Command
     }
 
     /**
-     * Clears all config options.
+     * Sets a config option value or clears all config values.
+     * @param string|null $value The option value.
      * @return CloneCommand Returns itself for method chaining.
      */
-    protected function configClear() : CloneCommand
+    public function config(string $value = null) : CloneCommand
     {
-        $this->config = [];
+        OptionValidator::validNoSpace(self::OPTION_CONFIG, $value);
+        if ($value === null) {
+            $this->configClear();
+        } else {
+            $this->config[] = $value;
+        }
+
         return $this;
     }
 
@@ -761,15 +720,6 @@ class CloneCommand implements Command
     public function getConfig() : array
     {
         return $this->config;
-    }
-
-    /**
-     * Compiles the command into an executable git command.
-     * @return GitCommand The compiled git command.
-     */
-    public function compile() : GitCommand
-    {
-        return new GitCommand($this);
     }
 
     /**
@@ -823,5 +773,33 @@ class CloneCommand implements Command
         ($this->destination !== '') && $str .= ' ' . escapeshellarg($this->destination);
 
         return $str;
+    }
+
+    /**
+     * Compiles the command into an executable git command.
+     * @return GitCommand The compiled git command.
+     */
+    public function compile() : GitCommand
+    {
+        return new GitCommand($this);
+    }
+
+    /**
+     * Gets the command's repo context.
+     * @return Repo The repo context.
+     */
+    public function getRepo() : Repo
+    {
+        return $this->repo;
+    }
+
+    /**
+     * Clears all config options.
+     * @return CloneCommand Returns itself for method chaining.
+     */
+    protected function configClear() : CloneCommand
+    {
+        $this->config = [];
+        return $this;
     }
 }

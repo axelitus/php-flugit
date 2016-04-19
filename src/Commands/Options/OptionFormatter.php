@@ -11,7 +11,7 @@
  */
 declare(strict_types = 1);
 
-namespace axelitus\FluGit\Commands;
+namespace axelitus\FluGit\Commands\Options;
 
 /**
  * Class OptionFormatter
@@ -103,11 +103,6 @@ class OptionFormatter
                 $value
                 : escapeshellarg($value))
             : '');
-    }
-
-    public static function formatPathOrUrl(string $option, $value, bool $noEscapeShellArg = false)
-    {
-
     }
 
     /**
