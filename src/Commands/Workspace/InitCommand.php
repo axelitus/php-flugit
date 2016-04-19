@@ -14,7 +14,7 @@ declare(strict_types = 1);
 namespace axelitus\FluGit\Commands\Workspace;
 
 use axelitus\FluGit\Commands\Command;
-use axelitus\FluGit\Commands\OptionFormatter;
+use axelitus\FluGit\Commands\Options\OptionFormatter;
 use axelitus\FluGit\Commands\GitCommand;
 use axelitus\FluGit\Repo;
 
