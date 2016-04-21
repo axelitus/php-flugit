@@ -45,7 +45,7 @@ class OptionFormatter
         string $optionCounterpart,
         bool $valueCounterpart
     ) {
-        return (($value) ? $option : (($valueCounterpart) ? $optionCounterpart : ''));
+        return (($value) ? ' ' . $option : (($valueCounterpart) ? ' ' . $optionCounterpart : ''));
     }
 
     /**
